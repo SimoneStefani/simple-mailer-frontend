@@ -1,17 +1,31 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
+import { Router, View } from "react-navi";
+import React, { Suspense } from "react";
+import { mount, route } from "navi";
+import ReactDOM from "react-dom";
+
+import Mailer from "./pages/Mailer";
+import Login from "./pages/Login";
+
+import "./index.css";
+
+const routes = mount({
+  "/": route({
+    //getData: () => api.fetchProducts(),
+    view: <Mailer />,
+  }),
+  "/login": route({
+    //getData: () => api.fetchProducts(),
+    view: <Login />,
+  }),
+});
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Router routes={routes}>
+      <Suspense fallback={null}>
+        <View />
+      </Suspense>
+    </Router>
   </React.StrictMode>,
-  document.getElementById('root')
+  document.getElementById("root")
 );
-
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();
