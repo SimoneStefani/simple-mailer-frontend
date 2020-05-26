@@ -1,13 +1,15 @@
-name: CD/CI Workflow
+name: Audit Workflow
 
-on: [push]
+on:
+  schedule:
+    - cron: "0 2 * * *" # run at 2 AM UTC
 
 jobs:
-  check:
-    name: Check
+  audit:
+    name: Audit
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v2
       - name: Use Node 12.13 LTS
         uses: actions/setup-node@v1
         with:
@@ -24,17 +26,5 @@ jobs:
             ${{ runner.os }}-yarn-
       - name: Install NPM dependencies
         run: yarn install
-      # - name: Lint with ESLint
-      #   run: yarn run lint
-      - name: Build
-        run: yarn run build
-
-  deploy:
-    if: github.ref == 'refs/heads/master'
-    name: Deploy
-    needs: check
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v1
-      - name: Deploy with Heroku
-        run: git push https://heroku:${{ secrets.HEROKU_API_KEY }}@git.heroku.com/simple-mailer-frontend.git HEAD:master -f
+      - name: Audit with Yarn
+        run: yarn audit
