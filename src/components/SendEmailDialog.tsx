@@ -14,13 +14,13 @@ type Props = {
   onClose: () => void;
 };
 
-const SendEmailDialog = ({ onSubmit, open, onClose }: Props) => {
+const SendEmailDialog: React.FC<Props> = ({ onSubmit, open, onClose }: Props) => {
   // hooks
   const clearForm: NewEmail = { to: "", subject: "", content: "" };
   const [email, setEmail] = useState(clearForm);
 
   // functions
-  const handleSubmit = () => {
+  const handleSubmit = (): void => {
     onSubmit(email);
     setEmail(clearForm);
     onClose();
@@ -32,9 +32,9 @@ const SendEmailDialog = ({ onSubmit, open, onClose }: Props) => {
       <DialogTitle id="form-dialog-title">Compose a new email</DialogTitle>
       <DialogContent>
         <DialogContentText>
-          Here you can write a new email. This simpler email implement one level
-          of redundancy leveraging two mailing providers. If one fails to send
-          your email this service will automatically switch to the other.
+          Here you can write a new email. This simpler email implement one level of redundancy
+          leveraging two mailing providers. If one fails to send your email this service will
+          automatically switch to the other.
         </DialogContentText>
         <TextField
           required
@@ -45,7 +45,7 @@ const SendEmailDialog = ({ onSubmit, open, onClose }: Props) => {
           fullWidth
           variant="outlined"
           value={email.to}
-          onChange={(e) => setEmail({ ...email, to: e.target.value })}
+          onChange={(e): void => setEmail({ ...email, to: e.target.value })}
         />
         <TextField
           required
@@ -54,7 +54,7 @@ const SendEmailDialog = ({ onSubmit, open, onClose }: Props) => {
           fullWidth
           variant="outlined"
           value={email.subject}
-          onChange={(e) => setEmail({ ...email, subject: e.target.value })}
+          onChange={(e): void => setEmail({ ...email, subject: e.target.value })}
         />
         <TextField
           required
@@ -65,7 +65,7 @@ const SendEmailDialog = ({ onSubmit, open, onClose }: Props) => {
           multiline
           rows={4}
           value={email.content}
-          onChange={(e) => setEmail({ ...email, content: e.target.value })}
+          onChange={(e): void => setEmail({ ...email, content: e.target.value })}
         />
       </DialogContent>
 

@@ -2,11 +2,8 @@
  * Determine if the user's browser API supports
  * local storage.
  */
-const localStorageSupported = () => {
-  return (
-    typeof window["localStorage"] != "undefined" &&
-    window["localStorage"] != null
-  );
+const localStorageSupported = (): boolean => {
+  return typeof window["localStorage"] != "undefined" && window["localStorage"] != null;
 };
 
 /**
@@ -15,7 +12,7 @@ const localStorageSupported = () => {
  * @param key
  * @param value
  */
-export const setLocalStorageItem = (key: string, value: any) => {
+export const setLocalStorageItem = (key: string, value: any): void => {
   if (localStorageSupported()) {
     localStorage.setItem(key, value);
   }
@@ -35,7 +32,7 @@ export const getLocalStorageItem = (key: string): any => {
  *
  * @param key
  */
-export const removeLocalStorageItem = (key: string) => {
+export const removeLocalStorageItem = (key: string): void => {
   if (localStorageSupported()) {
     localStorage.removeItem(key);
   }
@@ -44,7 +41,7 @@ export const removeLocalStorageItem = (key: string) => {
 /**
  * Remove all values from local storage.
  */
-export const clearLocalStorage = () => {
+export const clearLocalStorage = (): void => {
   if (localStorageSupported()) {
     localStorage.clear();
   }

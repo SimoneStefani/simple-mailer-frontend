@@ -11,11 +11,8 @@ import Avatar from "@material-ui/core/Avatar";
 import Paper from "@material-ui/core/Paper";
 import Box from "@material-ui/core/Box";
 
+import { setLocalStorageItem, getLocalStorageItem } from "../support/localStorageUtils";
 import { login } from "../api";
-import {
-  setLocalStorageItem,
-  getLocalStorageItem,
-} from "../support/localStorageUtils";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -57,7 +54,7 @@ const Login: React.FC = () => {
   }, []); // eslint-disable-line
 
   // functions
-  const handleLogin = (event: any) => {
+  const handleLogin = (event: any): void => {
     event.preventDefault();
     login(credentials)
       .then((res: any) => {
@@ -90,9 +87,7 @@ const Login: React.FC = () => {
               autoComplete="email"
               autoFocus
               value={credentials.email}
-              onChange={(e) =>
-                setCredentials({ ...credentials, email: e.target.value })
-              }
+              onChange={(e): void => setCredentials({ ...credentials, email: e.target.value })}
             />
             <TextField
               variant="outlined"
@@ -104,9 +99,7 @@ const Login: React.FC = () => {
               type="password"
               autoComplete="current-password"
               value={credentials.password}
-              onChange={(e) =>
-                setCredentials({ ...credentials, password: e.target.value })
-              }
+              onChange={(e): void => setCredentials({ ...credentials, password: e.target.value })}
             />
             <Button
               fullWidth

@@ -24,8 +24,8 @@ jobs:
             ${{ runner.os }}-yarn-
       - name: Install NPM dependencies
         run: yarn install
-      # - name: Lint with ESLint
-      #   run: yarn run lint
+      - name: Lint with TSLint
+        run: yarn run lint
       - name: Build
         run: yarn run build
 

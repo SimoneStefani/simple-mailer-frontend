@@ -15,7 +15,7 @@ type Props = {
   onClose: () => void;
 };
 
-const EmailDetailsDialog = ({ email, open, onClose }: Props) => {
+const EmailDetailsDialog: React.FC<Props> = ({ email, open, onClose }: Props) => {
   // render
 
   return (

@@ -13,15 +13,12 @@ import Paper from "@material-ui/core/Paper";
 import List from "@material-ui/core/List";
 import Box from "@material-ui/core/Box";
 
+import { removeLocalStorageItem, getLocalStorageItem } from "../support/localStorageUtils";
 import EmailDetailsDialog from "../components/EmailDetailsDialog";
 import SendEmailDialog from "../components/SendEmailDialog";
 import { getProfile, getEmails, sendEmail } from "../api";
 import { AuthContext } from "../support/AuthContext";
 import { formatTime } from "../support/utils";
-import {
-  removeLocalStorageItem,
-  getLocalStorageItem,
-} from "../support/localStorageUtils";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -46,9 +43,7 @@ const Mailer: React.FC = () => {
   const [selectedEmail, setSelectedEmail] = useState<Email | null>(null);
 
   useEffect(() => {
-    getLocalStorageItem("token")
-      ? handleGetProfile()
-      : navigation.navigate("/login");
+    getLocalStorageItem("token") ? handleGetProfile() : navigation.navigate("/login");
   }, []); // eslint-disable-line
 
   useEffect(() => {
@@ -56,7 +51,7 @@ const Mailer: React.FC = () => {
   }, [user]);
 
   // functions
-  const handleGetProfile = () => {
+  const handleGetProfile = (): void => {
     getProfile()
       .then((res: any) => setUser(res.data))
       .catch(() => {
@@ -65,24 +60,24 @@ const Mailer: React.FC = () => {
       });
   };
 
-  const handleGetEmails = () => {
+  const handleGetEmails = (): void => {
     getEmails()
       .then((res: any) => setEmails(res.data))
       .catch((err) => console.error(err));
   };
 
-  const handleSendEmail = (email: NewEmail) => {
+  const handleSendEmail = (email: NewEmail): void => {
     sendEmail(email)
       .then(() => handleGetEmails())
       .catch((err) => console.error(err));
   };
 
-  const handleSelectItem = (email: Email) => {
+  const handleSelectItem = (email: Email): void => {
     setSelectedEmail(email);
     setDetailodalOpen(true);
   };
 
-  const handleLogout = () => {
+  const handleLogout = (): void => {
     removeLocalStorageItem("token");
     navigation.navigate("/login");
   };
@@ -92,13 +87,7 @@ const Mailer: React.FC = () => {
     <Container component="main" maxWidth="sm">
       {user && (
         <Fragment>
-          <Box
-            mt={1}
-            mb={1}
-            display="flex"
-            justifyContent="space-between"
-            alignItems="center"
-          >
+          <Box mt={1} mb={1} display="flex" justifyContent="space-between" alignItems="center">
             <Box display="flex" alignItems="center">
               <MarkunreadMailbox color="primary" style={{ marginRight: 10 }} />
               <Typography variant="h6">SimpleMailer</Typography>
@@ -114,19 +103,13 @@ const Mailer: React.FC = () => {
 
           <Typography variant="h4">Welcome {user.name}!</Typography>
 
-          <Box
-            mt={3}
-            mb={2}
-            display="flex"
-            justifyContent="space-between"
-            alignItems="center"
-          >
+          <Box mt={3} mb={2} display="flex" justifyContent="space-between" alignItems="center">
             <Typography variant="h6">Last sent emails:</Typography>
 
             <Button
               variant="outlined"
               color="primary"
-              onClick={() => setCreateModalOpen(true)}
+              onClick={(): void => setCreateModalOpen(true)}
             >
               New Email
             </Button>
@@ -139,7 +122,7 @@ const Mailer: React.FC = () => {
                   divider={idx < emails.length - 1}
                   key={email.id}
                   selected={selectedEmail?.id === email.id}
-                  onClick={() => handleSelectItem(email)}
+                  onClick={(): void => handleSelectItem(email)}
                 >
                   <ListItemText
                     primary={email.subject}
@@ -165,13 +148,13 @@ const Mailer: React.FC = () => {
           <SendEmailDialog
             open={createModalOpen}
             onSubmit={handleSendEmail}
-            onClose={() => setCreateModalOpen(false)}
+            onClose={(): void => setCreateModalOpen(false)}
           />
 
           <EmailDetailsDialog
             open={detailModalOpen}
             email={selectedEmail}
-            onClose={() => {
+            onClose={(): void => {
               setDetailodalOpen(false);
               setSelectedEmail(null);
             }}
