@@ -1,3 +1,4 @@
+import * as Sentry from "@sentry/browser";
 import { Router, View } from "react-navi";
 import React, { Suspense } from "react";
 import { mount, route } from "navi";
@@ -11,15 +12,15 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 
 import "./index.css";
 
+Sentry.init({
+  dsn: process.env.REACT_APP_SENTRY_DSN,
+  attachStacktrace: true,
+  maxBreadcrumbs: 50,
+});
+
 const routes = mount({
-  "/": route({
-    //getData: () => api.fetchProducts(),
-    view: <Mailer />,
-  }),
-  "/login": route({
-    //getData: () => api.fetchProducts(),
-    view: <Login />,
-  }),
+  "/": route({ view: <Mailer /> }),
+  "/login": route({ view: <Login /> }),
 });
 
 ReactDOM.render(
