@@ -1,7 +1,117 @@
-import React from "react";
+import Typography from "@material-ui/core/Typography";
+import { makeStyles } from "@material-ui/core/styles";
+import React, { useState, useEffect } from "react";
+import TextField from "@material-ui/core/TextField";
+import Container from "@material-ui/core/Container";
+import Button from "@material-ui/core/Button";
+import Paper from "@material-ui/core/Paper";
+import { useNavigation } from "react-navi";
+import Box from "@material-ui/core/Box";
+
+import { login } from "../api";
+import {
+  setLocalStorageItem,
+  getLocalStorageItem,
+} from "../support/localStorageUtils";
+
+const useStyles = makeStyles((theme) => ({
+  paper: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+  },
+  avatar: {
+    margin: theme.spacing(1),
+    backgroundColor: theme.palette.secondary.main,
+  },
+  form: {
+    width: "100%",
+    marginTop: theme.spacing(1),
+  },
+  submit: {
+    margin: theme.spacing(3, 0, 2),
+  },
+}));
 
 const Login = () => {
-  return <h1>Login</h1>;
+  // hooks
+  const navigation = useNavigation();
+  const classes = useStyles();
+  const [credentials, setCredentials] = useState({
+    email: "",
+    password: "",
+  });
+
+  useEffect(() => {
+    const token = getLocalStorageItem("token");
+    if (token) navigation.navigate("/");
+  }, []); // eslint-disable-line
+
+  // functions
+  const handleLogin = (event: any) => {
+    event.preventDefault();
+    login(credentials)
+      .then((res: any) => {
+        setLocalStorageItem("token", res.data.jwt);
+        navigation.navigate("/");
+      })
+      .catch((err) => console.log(err));
+  };
+
+  // render
+  return (
+    <Container component="main" maxWidth="xs">
+      <Paper variant="outlined">
+        <Box component="div" p={5} className={classes.paper}>
+          <Typography component="h1" variant="h5">
+            Sign in
+          </Typography>
+
+          <form className={classes.form} noValidate>
+            <TextField
+              size="small"
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              placeholder="Email Address"
+              name="email"
+              autoComplete="email"
+              autoFocus
+              value={credentials.email}
+              onChange={(e) =>
+                setCredentials({ ...credentials, email: e.target.value })
+              }
+            />
+            <TextField
+              size="small"
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              name="password"
+              placeholder="Password"
+              type="password"
+              autoComplete="current-password"
+              value={credentials.password}
+              onChange={(e) =>
+                setCredentials({ ...credentials, password: e.target.value })
+              }
+            />
+            <Button
+              fullWidth
+              variant="outlined"
+              color="primary"
+              className={classes.submit}
+              onClick={handleLogin}
+            >
+              Sign In
+            </Button>
+          </form>
+        </Box>
+      </Paper>
+    </Container>
+  );
 };
 
 export default Login;
