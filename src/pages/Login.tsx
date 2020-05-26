@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { useNavigation } from "react-navi";
 
+import MarkunreadMailbox from "@material-ui/icons/MarkunreadMailbox";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import Container from "@material-ui/core/Container";
 import Button from "@material-ui/core/Button";
+import Avatar from "@material-ui/core/Avatar";
 import Paper from "@material-ui/core/Paper";
 import Box from "@material-ui/core/Box";
 
@@ -33,6 +35,10 @@ const useStyles = makeStyles((theme) => ({
   },
   submit: {
     margin: theme.spacing(3, 0, 2),
+  },
+  avatar: {
+    margin: theme.spacing(1),
+    backgroundColor: theme.palette.primary.main,
   },
 }));
 
@@ -66,6 +72,9 @@ const Login: React.FC = () => {
     <Container component="main" maxWidth="xs" className={classes.paperWrapper}>
       <Paper variant="outlined">
         <Box component="div" p={5} className={classes.paper}>
+          <Avatar className={classes.avatar}>
+            <MarkunreadMailbox />
+          </Avatar>
           <Typography component="h2" variant="h5">
             SimpleMailer - Login
           </Typography>
