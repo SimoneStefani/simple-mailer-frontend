@@ -9,22 +9,20 @@ import Dialog from "@material-ui/core/Dialog";
 import Button from "@material-ui/core/Button";
 
 type Props = {
-  onSubmit: (content: any) => void;
+  onSubmit: (content: NewEmail) => void;
   open: boolean;
   onClose: () => void;
 };
 
 const SendEmailDialog = ({ onSubmit, open, onClose }: Props) => {
   // hooks
-  const [email, setEmail] = useState({
-    to: "",
-    subject: "",
-    content: "",
-  });
+  const clearForm: NewEmail = { to: "", subject: "", content: "" };
+  const [email, setEmail] = useState(clearForm);
 
   // functions
   const handleSubmit = () => {
     onSubmit(email);
+    setEmail(clearForm);
     onClose();
   };
 
@@ -34,8 +32,9 @@ const SendEmailDialog = ({ onSubmit, open, onClose }: Props) => {
       <DialogTitle id="form-dialog-title">Compose a new email</DialogTitle>
       <DialogContent>
         <DialogContentText>
-          To subscribe to this website, please enter your email address here.We
-          will send updates occasionally.
+          Here you can write a new email. This simpler email implement one level
+          of redundancy leveraging two mailing providers. If one fails to send
+          your email this service will automatically switch to the other.
         </DialogContentText>
         <TextField
           required
@@ -71,9 +70,7 @@ const SendEmailDialog = ({ onSubmit, open, onClose }: Props) => {
       </DialogContent>
 
       <DialogActions>
-        <Button onClick={onClose} color="secondary">
-          Cancel
-        </Button>
+        <Button onClick={onClose}>Cancel</Button>
         <Button onClick={handleSubmit} color="primary">
           Send
         </Button>

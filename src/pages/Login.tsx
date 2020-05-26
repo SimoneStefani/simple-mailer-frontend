@@ -1,11 +1,12 @@
+import React, { useState, useEffect } from "react";
+import { useNavigation } from "react-navi";
+
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
-import React, { useState, useEffect } from "react";
 import TextField from "@material-ui/core/TextField";
 import Container from "@material-ui/core/Container";
 import Button from "@material-ui/core/Button";
 import Paper from "@material-ui/core/Paper";
-import { useNavigation } from "react-navi";
 import Box from "@material-ui/core/Box";
 
 import { login } from "../api";
@@ -20,20 +21,22 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: "column",
     alignItems: "center",
   },
-  avatar: {
-    margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main,
+  paperWrapper: {
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    minHeight: "100vh",
   },
   form: {
     width: "100%",
-    marginTop: theme.spacing(1),
+    marginTop: theme.spacing(5),
   },
   submit: {
     margin: theme.spacing(3, 0, 2),
   },
 }));
 
-const Login = () => {
+const Login: React.FC = () => {
   // hooks
   const navigation = useNavigation();
   const classes = useStyles();
@@ -55,23 +58,22 @@ const Login = () => {
         setLocalStorageItem("token", res.data.jwt);
         navigation.navigate("/");
       })
-      .catch((err) => console.log(err));
+      .catch((err) => console.error(err));
   };
 
   // render
   return (
-    <Container component="main" maxWidth="xs">
+    <Container component="main" maxWidth="xs" className={classes.paperWrapper}>
       <Paper variant="outlined">
         <Box component="div" p={5} className={classes.paper}>
-          <Typography component="h1" variant="h5">
-            Sign in
+          <Typography component="h2" variant="h5">
+            SimpleMailer - Login
           </Typography>
 
           <form className={classes.form} noValidate>
             <TextField
-              size="small"
               variant="outlined"
-              margin="normal"
+              margin="dense"
               required
               fullWidth
               placeholder="Email Address"
@@ -84,9 +86,8 @@ const Login = () => {
               }
             />
             <TextField
-              size="small"
               variant="outlined"
-              margin="normal"
+              margin="dense"
               required
               fullWidth
               name="password"

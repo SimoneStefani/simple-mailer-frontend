@@ -1,6 +1,6 @@
 import API from "./support/axios";
 
-export const login = (credentials: { email: string; password: string }) => {
+export const login = (credentials: Credentials) => {
   return API.post("users/login", credentials);
 };
 
@@ -12,6 +12,6 @@ export const getEmails = () => {
   return API.get("emails");
 };
 
-export const sendEmail = (email: any) => {
+export const sendEmail = (email: NewEmail) => {
   return API.post("emails", email);
 };
