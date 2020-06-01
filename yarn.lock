@@ -8804,10 +8804,10 @@ react-is@^16.7.0, react-is@^16.8.0, react-is@^16.8.1, react-is@^16.8.4:
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.13.1.tgz#789729a4dc36de2999dc156dd6c1d9c18cea56a4"
   integrity sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==
 
-react-navi@^0.14.3:
-  version "0.14.3"
-  resolved "https://registry.yarnpkg.com/react-navi/-/react-navi-0.14.3.tgz#60964017521e41c1c5e48782bb8cbab766ef8aa7"
-  integrity sha512-fht9sVtJKpiD6pk08+YNcGNLMlolm13pVWqwbQVgOqWZW/1OulhSn3pY0dyJ6PLUO56ieYk+kjou12yWSiDQEw==
+react-navi@^0.14.4:
+  version "0.14.4"
+  resolved "https://registry.yarnpkg.com/react-navi/-/react-navi-0.14.4.tgz#6d622f08009fda5517726541402f3f234083b687"
+  integrity sha512-faMCCEikOUvsJNI9cD7Zqktv7ZOV5MNLcy5lli6WaTqhtUmS22C6X7fivvOWx/FukNLt4bU1R1+ScRVDk5+oBQ==
   dependencies:
     "@types/history" "^4.6.2"
 
