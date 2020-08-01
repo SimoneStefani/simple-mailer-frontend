@@ -19,7 +19,7 @@
     "react-dom": "^16.13.1",
     "react-navi": "^0.14.4",
     "react-scripts": "^3.4.1",
-    "typescript": "~3.9.5"
+    "typescript": "~3.9.7"
   },
   "scripts": {
     "start": "react-scripts start",
