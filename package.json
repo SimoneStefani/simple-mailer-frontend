@@ -41,9 +41,6 @@
       "last 1 safari version"
     ]
   },
-  "resolutions": {
-    "yargs-parser": "^18.1.2"
-  },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^2.34.0",
     "@typescript-eslint/parser": "^2.34.0",

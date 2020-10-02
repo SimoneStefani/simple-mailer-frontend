@@ -3,7 +3,6 @@
 | Automation                | Status                                                                                                                                         |
 | ------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
 | CD/CI Pipeline (`master`) | ![CD/CI Workflow](https://github.com/SimoneStefani/simple-mailer-frontend/workflows/CD/CI%20Workflow/badge.svg)                                |
-| Dependency Auditing       | ![Audit Workflow](https://github.com/SimoneStefani/simple-mailer-frontend/workflows/Audit%20Workflow/badge.svg)                                |
 | Dependency Management     | [![Dependabot Status](https://api.dependabot.com/badges/status?host=github&repo=SimoneStefani/simple-mailer-frontend)](https://dependabot.com) |
 
 ## Table of Contents
